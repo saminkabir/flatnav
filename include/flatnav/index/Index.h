@@ -269,6 +269,52 @@ class Index {
     _cur_num_nodes++;
   }
 
+  void setNodeNeighbors(
+
+    node_id_t node,
+
+    const std::vector<node_id_t>& neighbors
+
+  ) {
+
+      if (node >= _cur_num_nodes) {
+
+          throw std::out_of_range("Invalid node id");
+
+      }
+
+      if (neighbors.size() > _M) {
+
+          throw std::invalid_argument(
+
+              "Number of neighbors exceeds M"
+
+          );
+
+      }
+
+      node_id_t* links = getNodeLinks(node);
+
+      size_t i = 0;
+
+      // Write retained neighbors
+
+      for (; i < neighbors.size(); ++i) {
+
+          links[i] = neighbors[i];
+
+      }
+
+      // FlatNav uses self-loops for unused slots
+
+      for (; i < _M; ++i) {
+
+          links[i] = node;
+
+      }
+
+  }
+
   /**
    * @brief Adds vectors to the index in batches.
    *
