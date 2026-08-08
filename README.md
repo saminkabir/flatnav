@@ -41,6 +41,7 @@ Alternatively, if you just don't care about cross-platform builds and want to te
 ```shell
 $ cd python-bindings
 $ pip install .
+$ CMAKE_ARGS="-DCMAKE_POLICY_VERSION_MINIMUM=3.5" pip install .
 ```
 
 #### C++ Installation
